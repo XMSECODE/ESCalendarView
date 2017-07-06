@@ -22,6 +22,9 @@
         self.backgroundColor = [UIColor yellowColor];
         self.backCircleRadius = 20;
         self.selectedColor = [UIColor greenColor];
+        self.pointRadius = 1;
+        self.showPoint = NO;
+        self.pointColor = [UIColor redColor];
     }
     return self;
 }

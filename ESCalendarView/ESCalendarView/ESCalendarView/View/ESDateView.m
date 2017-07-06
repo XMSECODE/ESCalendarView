@@ -91,6 +91,12 @@ static NSString* DidSelectedDateViewNotificationKey = @"didSelectedDateViewNotif
                 CGContextAddArc(context, x + width / 2, y + height / 2, model.backCircleRadius, 0, 2 * M_PI, 0); //添加一个圆
                 CGContextDrawPath(context, kCGPathFill);//绘制填充
             }
+            if (model.showPoint == YES) {
+                CGContextSetFillColorWithColor(context, model.pointColor.CGColor);
+                CGContextAddArc(context, x + width / 2, y + height - model.pointRadius - 2, model.pointRadius, 0, 2 * M_PI, 0); //添加一个圆
+                CGContextDrawPath(context, kCGPathFill);//绘制填充
+            }
+
             [self drawText:[NSString stringWithFormat:@"%02d",i + 1] frame:CGRectMake(x, y, width, height) dateTextModel:model textSize:self.textSize];
         }
         
@@ -139,7 +145,7 @@ static NSString* DidSelectedDateViewNotificationKey = @"didSelectedDateViewNotif
     CGFloat y = (startIndex + dateCount - 1) / 7 * height;
     
     ESDateTextModel* model = self.modelArray[self.didTouchDateIndex - 1];
-    [self createShapeLayerWithCenter:CGRectMake(x + width / 2 - model.backCircleRadius, y + height / 2 - model.backCircleRadius, model.backCircleRadius * 2, model.backCircleRadius * 2)];
+    [self createShapeLayerWithCenter:CGRectMake(x + width / 2 - model.backCircleRadius, y + height / 2 - model.backCircleRadius, model.backCircleRadius * 2, model.backCircleRadius * 2 + 2)];
     
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         animation.fromValue = @(0);
@@ -159,15 +165,31 @@ static NSString* DidSelectedDateViewNotificationKey = @"didSelectedDateViewNotif
 
 - (UIImage *)creatImageWithText:(NSString *)text backColor:(UIColor *)backColor dateTextModel:(ESDateTextModel *)dateTextModel {
     CGFloat size = MIN(dateTextModel.backCircleRadius * 2, dateTextModel.backCircleRadius * 2);
-    UIGraphicsBeginImageContext(CGSizeMake(size * 2, size * 2));
+    
+    UIGraphicsBeginImageContext(CGSizeMake(size * 2, size * 2 + 4));
     CGContextRef context=UIGraphicsGetCurrentContext();
     CGContextDrawPath(context, kCGPathStroke);
     
+    
+    CGFloat arcX = size;
+    CGFloat arcY = size;
+    CGFloat arcRadius = size;
     CGContextSetFillColorWithColor(context, backColor.CGColor);
-    CGContextAddArc(context, size , size, size, 0, 2 * M_PI, 0);
+    CGContextAddArc(context, arcX , arcY, arcRadius, 0, 2 * M_PI, 0);
     CGContextDrawPath(context, kCGPathFill);
     
-    [self drawText:text frame:CGRectMake(0, 0, size * 2, size * 2) dateTextModel:dateTextModel textSize:self.textSize * 2];
+    CGFloat textX = 0;
+    CGFloat textY = 0;
+    CGFloat textW = size * 2;
+    CGFloat textH = size * 2;
+    [self drawText:text frame:CGRectMake(textX, textY, textW, textH) dateTextModel:dateTextModel textSize:self.textSize * 2];
+    
+    if (dateTextModel.showPoint) {
+        CGContextSetFillColorWithColor(context, dateTextModel.pointColor.CGColor);
+        CGContextAddArc(context, size, size * 2, 4, 0, 2 * M_PI, 0);
+        CGContextDrawPath(context, kCGPathFill);
+    }
+
     
     UIImage *newImage=UIGraphicsGetImageFromCurrentImageContext();
     

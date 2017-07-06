@@ -45,6 +45,21 @@
 //被选的颜色 default green
 @property(nonatomic,strong)UIColor* selectedColor;
 
+/**
+ default NO
+ */
+@property (nonatomic, assign) BOOL showPoint;
+
+/**
+ default red
+ */
+@property (nonatomic, strong) UIColor *pointColor;
+
+/**
+ default 1
+ */
+@property (nonatomic, assign) CGFloat pointRadius;
+
 + (instancetype)dateTextModelWithTextColor:(UIColor *)textColor
                               hiddenCircle:(BOOL)hiddenCircle
                                circleColor:(UIColor *)circleColor
