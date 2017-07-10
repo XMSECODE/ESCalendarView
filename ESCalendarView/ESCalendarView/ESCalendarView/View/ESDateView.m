@@ -200,6 +200,8 @@ static NSString* DidSelectedDateViewNotificationKey = @"didSelectedDateViewNotif
 }
 
 - (void)reloadView {
+    [self.shapeLayer removeFromSuperlayer];
+    self.didTouchDateIndex = 0;
     [self setNeedsDisplay];
 }
 
