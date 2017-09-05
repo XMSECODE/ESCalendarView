@@ -396,6 +396,7 @@
 				F010E92A1F02347D005B26C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
