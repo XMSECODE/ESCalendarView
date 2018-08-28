@@ -103,6 +103,18 @@ static ESCalendarHelp* staticCalendarHelp;
     return [[ESCalendarHelp sharedCalendarHelp].calendar dateFromComponents:componentsNewDate];
 }
 
++ (BOOL)isSameDayFirstDate:(NSDate *)firstDate secondDate:(NSDate *)secondDate {
+    NSDateComponents *firstDateComponents = [[ESCalendarHelp sharedCalendarHelp].calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitWeekOfMonth fromDate:firstDate];
+    
+    NSDateComponents *secondDateComponents = [[ESCalendarHelp sharedCalendarHelp].calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitWeekOfMonth fromDate:secondDate];
+
+    if (firstDateComponents.year == secondDateComponents.year && firstDateComponents.month == secondDateComponents.month && firstDateComponents.day == secondDateComponents.day) {
+        return YES;
+    }else {
+        return NO;
+    }
+}
+
 #pragma mark - setter & getter
 - (NSDateFormatter *)dDateFormatter {
     if (_dDateFormatter == nil) {

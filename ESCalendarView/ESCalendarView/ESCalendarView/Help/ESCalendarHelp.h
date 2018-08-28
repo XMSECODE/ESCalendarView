@@ -41,4 +41,8 @@
  */
 + (NSDate *)getFirstDayOnThisMonth:(NSDate *)date;
 
+/**
+ 指定日期是否为同一天
+ */
++ (BOOL)isSameDayFirstDate:(NSDate *)firstDate secondDate:(NSDate *)secondDate;
 @end
