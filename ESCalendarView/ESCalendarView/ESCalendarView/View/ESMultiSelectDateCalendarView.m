@@ -54,30 +54,36 @@
     dateTextModel.hiddenBackCircle = NO;
     dateTextModel.backgroundColor = [UIColor whiteColor];
     
-    
     UIColor *backColor = self.selectedBackgroundColor;
+    UIColor *textColor = self.selectedTextColor;
     if (backColor == nil) {
         backColor = [UIColor redColor];
+    }
+    if (textColor == nil) {
+        textColor = [UIColor whiteColor];
     }
     
     dateTextModel.selectedColor = backColor;
     
-  
     
     if (self.startDate != nil && self.endDate == nil) {
         if ([date isEqualToDate:self.startDate]) {
             dateTextModel.backgroundColor = backColor;
+            dateTextModel.textColor = textColor;
         }else {
             dateTextModel.backgroundColor = [UIColor whiteColor];
+            dateTextModel.textColor = [UIColor blackColor];
         }
     }else if(self.startDate != nil && self.endDate != nil) {
-        
         if ([ESCalendarHelp isSameDayFirstDate:date secondDate:self.startDate] || [ESCalendarHelp isSameDayFirstDate:self.endDate secondDate:date]) {
             dateTextModel.backgroundColor = backColor;
+            dateTextModel.textColor = textColor;
         }else if ([[date earlierDate:self.startDate] isEqualToDate:self.startDate] && [[date earlierDate:self.endDate] isEqualToDate:date]) {
             dateTextModel.backgroundColor = backColor;
+            dateTextModel.textColor = textColor;
         }else {
             dateTextModel.backgroundColor = [UIColor whiteColor];
+            dateTextModel.textColor = [UIColor blackColor];
         }
     }
 }
@@ -86,6 +92,14 @@
  日历被点击时调用
  */
 - (void)didTouchDate:(NSDate *)date dateTextModel:(ESDateTextModel *)dateTextModel {
+    
+    UIColor *textColor = self.selectedTextColor;
+    if (textColor == nil) {
+        textColor = [UIColor whiteColor];
+    }
+    
+    dateTextModel.textColor = textColor;
+    
     if (self.startDate == nil && self.endDate == nil) {
         self.startDate = date;
     }else if (self.startDate != nil && self.endDate == nil) {

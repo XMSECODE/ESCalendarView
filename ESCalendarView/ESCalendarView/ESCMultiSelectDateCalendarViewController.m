@@ -26,6 +26,7 @@
     ESMultiSelectDateCalendarView *calendarView = [[ESMultiSelectDateCalendarView alloc] initWithFrame:CGRectMake(0, 100, kScreenSize.width, 300)];
     self.calendarView = calendarView;
     self.calendarView.selectedBackgroundColor = [UIColor blueColor];
+    self.calendarView.selectedTextColor = [UIColor whiteColor];
     self.calendarView.delegate = self;
     [self.view addSubview:calendarView];
 }

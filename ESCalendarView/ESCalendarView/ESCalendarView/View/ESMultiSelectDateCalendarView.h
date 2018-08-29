@@ -20,6 +20,8 @@
 
 @property(nonatomic,strong)UIColor* selectedBackgroundColor;
 
+@property(nonatomic,strong)UIColor* selectedTextColor;
+
 @property(nonatomic,weak)id<ESMultiSelectDateCalendarViewDelegate> delegate;
 
 @end
