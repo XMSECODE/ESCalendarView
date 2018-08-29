@@ -12,7 +12,7 @@
 #define kScreenSize [UIScreen mainScreen].bounds.size
 
 
-@interface ESCMultiSelectDateCalendarViewController ()
+@interface ESCMultiSelectDateCalendarViewController () <ESMultiSelectDateCalendarViewDelegate>
 
 @property(nonatomic,weak)ESMultiSelectDateCalendarView *calendarView;
 
@@ -25,8 +25,14 @@
     
     ESMultiSelectDateCalendarView *calendarView = [[ESMultiSelectDateCalendarView alloc] initWithFrame:CGRectMake(0, 100, kScreenSize.width, 300)];
     self.calendarView = calendarView;
+    self.calendarView.selectedBackgroundColor = [UIColor blueColor];
+    self.calendarView.delegate = self;
     [self.view addSubview:calendarView];
 }
 
+#pragma mark - ESMultiSelectDateCalendarViewDelegate
+- (void)ESMultiSelectDateCalendarView:(ESMultiSelectDateCalendarView *)calendarView selectedStartDate:(NSDate *)startDate selectedEndDate:(NSDate *)endDate {
+    NSLog(@"%@===%@",startDate,endDate);
+}
 
 @end

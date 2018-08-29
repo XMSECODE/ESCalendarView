@@ -38,7 +38,7 @@ typedef enum : NSUInteger {
 @property(nonatomic,assign)NSUInteger startMonthsIndex;
 //default 20
 @property(nonatomic,assign)CGFloat dateViewTextSize;
-//被点击的动画时间
+//default 0.3 被点击的动画时间
 @property(nonatomic,assign)CGFloat animationDuration;
 
 @end

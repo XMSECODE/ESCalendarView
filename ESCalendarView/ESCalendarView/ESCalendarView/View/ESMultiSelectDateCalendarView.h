@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class ESMultiSelectDateCalendarView;
+
+@protocol ESMultiSelectDateCalendarViewDelegate <NSObject>
+
+- (void)ESMultiSelectDateCalendarView:(ESMultiSelectDateCalendarView *)calendarView selectedStartDate:(NSDate *)startDate selectedEndDate:(NSDate *)endDate;
+
+@end
+
 @interface ESMultiSelectDateCalendarView : UIView
+
+@property(nonatomic,strong)UIColor* selectedBackgroundColor;
+
+@property(nonatomic,weak)id<ESMultiSelectDateCalendarViewDelegate> delegate;
 
 @end

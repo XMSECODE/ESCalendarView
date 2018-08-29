@@ -17,6 +17,14 @@
 
 @implementation ESCalendarSetting
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.animationDuration = 0.3;
+    }
+    return self;
+}
+
 -(UIColor *)weekViewTextColor{
     if (_weekViewTextColor == nil) {
         _weekViewTextColor = [UIColor blackColor];
@@ -97,7 +105,7 @@
 }
 
 - (CGFloat)animationDuration {
-    if (_animationDuration <= 0) {
+    if (_animationDuration < 0) {
         _animationDuration = 0.3;
     }
     return _animationDuration;

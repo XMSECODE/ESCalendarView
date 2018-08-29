@@ -147,17 +147,23 @@ static NSString* DidSelectedDateViewNotificationKey = @"didSelectedDateViewNotif
     ESDateTextModel* model = self.modelArray[self.didTouchDateIndex - 1];
     [self createShapeLayerWithCenter:CGRectMake(x + width / 2 - model.backCircleRadius, y + height / 2 - model.backCircleRadius, model.backCircleRadius * 2, model.backCircleRadius * 2 + 2)];
     
+    if (self.animationDuration <= 0) {
+        UIImage* image = [self creatImageWithText:[NSString stringWithFormat:@"%02zd",dateCount] backColor:model.selectedColor dateTextModel:model];
+        self.shapeLayer.contents = (__bridge id _Nullable)(image.CGImage);
+    }else {
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         animation.fromValue = @(0);
         animation.toValue = @(1);
         animation.removedOnCompletion = NO;
         animation.duration = self.animationDuration;
+        
+        
+        UIImage* image = [self creatImageWithText:[NSString stringWithFormat:@"%02zd",dateCount] backColor:model.selectedColor dateTextModel:model];
+        self.shapeLayer.contents = (__bridge id _Nullable)(image.CGImage);
+        
+        [self.shapeLayer addAnimation:animation forKey:@"calendarAnimation"];
+    }
     
-    
-    UIImage* image = [self creatImageWithText:[NSString stringWithFormat:@"%02zd",dateCount] backColor:model.selectedColor dateTextModel:model];
-    self.shapeLayer.contents = (__bridge id _Nullable)(image.CGImage);
-    
-    [self.shapeLayer addAnimation:animation forKey:@"calendarAnimation"];
 
     [self setNeedsDisplay];
     

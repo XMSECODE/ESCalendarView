@@ -61,11 +61,9 @@ static ESCalendarHelp* staticCalendarHelp;
     if (month > 12) {
         month = month - 12;
         year++;
-        offMonth = 0;
     }else if (month <= 0) {
-        month = 12 - month;
+        month = 12 + month;
         year--;
-        offMonth = 0;
     }
     NSString* dateString = [NSString stringWithFormat:@"%zd-%zd-15",year,month];
     NSDate* resultDate = [[ESCalendarHelp sharedCalendarHelp].yyyyMMDateFormatter dateFromString:dateString];
