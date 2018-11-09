@@ -114,7 +114,7 @@
         self.endDate = nil;
         self.startDate = date;
     }
-    if (self.endDate && self.startDate) {
+    if (self.endDate || self.startDate) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(ESMultiSelectDateCalendarView:selectedStartDate:selectedEndDate:)]) {
             [self.delegate ESMultiSelectDateCalendarView:self selectedStartDate:self.startDate selectedEndDate:self.endDate];
         }
